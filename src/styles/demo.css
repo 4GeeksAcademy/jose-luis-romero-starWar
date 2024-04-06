@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+.menu{
+    margin-top: 20px;
+    
+}
+.col-4{
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+.info li{
+    font-size: 19px;
+    justify-items: center;
+    
+}
+
+.picture{
+    width: 350px;
+    height: 460px;
+}

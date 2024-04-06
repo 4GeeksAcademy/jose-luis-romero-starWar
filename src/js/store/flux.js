@@ -1,43 +1,47 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contacto:{},
+			contactoFilms:{},
+			contactoSpecies:{},
+
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			getSingleCharacter: (id)=>{
+				fetch(`https://www.swapi.tech/api/people/${id}`,{
+					method:"GET",
+				})
+				.then(response => response.json())
+				.then(data => 
+					setStore({ contacto:data.result.properties})
+				)
+				.catch(error => console.log('error:', error));
+			}, 
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			getSingleFilms: (id)=>{
+				fetch(`https://www.swapi.tech/api/films/${id}`,{
+					method:"GET",
+				})
+				.then(response => response.json())
+				.then(data => 
+					setStore({ contactoFilms:data.result.properties})
+				)
+				.catch(error => console.log('error:', error));
+			},
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			getSingleSpecies: (id)=>{
+				fetch(`https://www.swapi.tech/api/species/${id}`,{
+					method:"GET",
+				})
+				.then(response => response.json())
+				.then(data => 
+					setStore({ contactoSpecies:data.result.properties})
+				)
+				.catch(error => console.log('error:', error));
+			},
+		
+			
 		}
 	};
 };
